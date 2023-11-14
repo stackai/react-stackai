@@ -15,13 +15,10 @@ export default defineConfig({
     },
     rollupOptions: {
       // TODO: Maybe adding here react iframe?
+      // Make sure to externalize deps that shouldn't be bundled
       external: ['react', 'react-dom'],
       output: {
-        // TODO: This section seems to be bad?
-        // globals: {
-        //   react: 'React',
-        //   'react-dom': 'ReactDOM',
-        // },
+        // Override dist folder because root is in the example/ folder
         dir: 'dist',
       },
     },
