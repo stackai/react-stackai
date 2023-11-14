@@ -16,6 +16,11 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react-dom'],
       output: {
+        // TODO: This section seems to be bad?
+        // globals: {
+        //   react: 'React',
+        //   'react-dom': 'ReactDOM',
+        // },
         globals: {
           dir: 'dist'
         },
