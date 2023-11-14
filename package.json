@@ -1,11 +1,21 @@
 {
   "name": "@stack/react-stack",
+  "private": true,
   "version": "0.1.0",
   "files": [
     "dist"
   ],
   "type": "module",
-  "private": true,
+  "main": "./dist/react-stack.cjs",
+  "module": "./dist/react-stack.js",
+  "react-native": "./dist/react-stack.js",
+  "exports": {
+    ".": {
+      "types": "./dist/stack.d.ts",
+      "import": "./dist/react-stack.js",
+      "require": "./dist/react-stack.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -16,6 +26,7 @@
     "lodash.debounce": "^4.0.8",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0",
+    "react-iframe": "^1.8.5",
     "react-merge-refs": "^2.1.1"
   },
   "peerDependencies": {
