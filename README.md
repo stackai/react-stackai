@@ -1,6 +1,8 @@
 
 ![ghbanner](https://github.com/stackai/react-stackai/assets/32944505/680b4449-2713-4eda-bcbe-4b0de7e66b1a)
 
+![CI](https://github.com/stackai/react-stackai/workflows/Check%20successful%20build/badge.svg)
+
 
 # react-stackai
 
