@@ -1,7 +1,6 @@
 {
-  "name": "@stack/react-stack",
-  "private": true,
-  "version": "0.1.0",
+  "name": "react-stackai",
+  "version": "0.1.1",
   "files": [
     "dist"
   ],
