@@ -1,4 +1,6 @@
-<!-- TODO: Cover image -->
+
+![ghbanner](https://github.com/stackai/react-stackai/assets/32944505/680b4449-2713-4eda-bcbe-4b0de7e66b1a)
+
 
 # react-stackai
 
