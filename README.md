@@ -28,7 +28,11 @@ pnpm install react-stackai
 
 To use `react-stackai`, first you have to go to the Stack flow builder, click on the `Export` button, select `Website Chatbot` and copy the url your project is served from.
 
-<!-- TODO: SCREENSHOT OF HOW TO COPY THE URL -->
+<img width="1476" alt="image" src="https://github.com/stackai/react-stackai/assets/32944505/134c7cf5-4596-4fef-9881-19ba9ccf081c">
+
+
+You can copy the URL and pass it to the `<Stack />` component in react:
+
 
 ```jsx
 import Stack from 'react-stackai';
