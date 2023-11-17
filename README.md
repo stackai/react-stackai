@@ -1,12 +1,10 @@
-
 ![ghbanner](https://github.com/stackai/react-stackai/assets/32944505/680b4449-2713-4eda-bcbe-4b0de7e66b1a)
 
 ![CI](https://github.com/stackai/react-stackai/workflows/Check%20successful%20build/badge.svg)
 
-
 # react-stackai
 
-**react-stackai** allows you to export and use Stack AI interfaces directly in your React-based applications.
+**react-stackai** allows you to export and use Stack AI interfaces as React components.
 
 ✨ [StackAI](https://stack-ai.com) is the no-code AI application builder.
 
@@ -30,9 +28,7 @@ To use `react-stackai`, first you have to go to the Stack flow builder, click on
 
 <img width="1476" alt="image" src="https://github.com/stackai/react-stackai/assets/32944505/134c7cf5-4596-4fef-9881-19ba9ccf081c">
 
-
 You can copy the URL and pass it to the `<Stack />` component in react:
-
 
 ```jsx
 import Stack from 'react-stackai';
