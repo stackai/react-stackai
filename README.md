@@ -76,13 +76,13 @@ pnpm dev
 ### Build the library
 
 ```bash
-npm run build
+npm run build:react
 ```
 
 or
 
 ```bash
-pnpm build
+pnpm build:react
 ```
 
 Open a PR and you should be good to go!

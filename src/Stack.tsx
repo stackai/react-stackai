@@ -24,7 +24,7 @@ const Stack = forwardRef(function Stack({ project, innerRef }: StackProps) {
             iframe.style.height = '90px';
           }, 300);
         } else {
-          const isMobile = window.innerWidth < 768;
+          const isMobile = window.innerWidth < 1000;
           if (isMobile) {
             // Mobile
             iframe.style.width = '100vw';

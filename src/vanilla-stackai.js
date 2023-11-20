@@ -1,6 +1,6 @@
 // Constants
 const IFRAME_ID = 'responsiveIframe';
-const MOBILE_BREAKPOINT = 768;
+const MOBILE_BREAKPOINT = 1000;
 const IFRAME_WIDTH_MOBILE = '100vw';
 const IFRAME_HEIGHT_MOBILE = '38.5rem';
 const IFRAME_WIDTH_DESKTOP = '35rem';
