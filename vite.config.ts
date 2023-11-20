@@ -2,8 +2,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 
-// https://vitejs.dev/config/
-export default defineConfig({
+// Configuration for React component
+const reactConfig = defineConfig({
   plugins: [react()],
   root: 'example',
   build: {
@@ -14,13 +14,38 @@ export default defineConfig({
       fileName: (format) => `react-stack.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
-      // TODO: Maybe adding here react iframe?
-      // Make sure to externalize deps that shouldn't be bundled
       external: ['react', 'react-dom'],
       output: {
-        // Override dist folder because root is in the example/ folder
-        dir: 'dist',
+        dir: path.resolve(__dirname, './dist/'),
       },
     },
   },
+});
+
+// Configuration for Vanilla JavaScript script
+const vanillaConfig = defineConfig({
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, './src/vanilla-stackai.js'),
+      name: 'VanillaStackAI',
+      formats: ['iife'],
+      fileName: () => 'vanilla-stackai.js',
+    },
+    rollupOptions: {
+      output: {
+        dir: path.resolve(__dirname, './dist/vanilla'),
+      },
+    },
+    plugins: [],
+  },
+});
+
+export default defineConfig(({ mode }) => {
+  const buildTarget = process.env.BUILD_TARGET;
+
+  if (buildTarget === 'vanilla') {
+    return vanillaConfig;
+  } else {
+    return reactConfig;
+  }
 });
