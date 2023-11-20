@@ -10,20 +10,15 @@ assignees: ''
 
 ## Describe the bug
 
-<!-- A clear and concise description of what the bug is. -->
+<!-- A clear and description of what the bug is. -->
 
 ## To Reproduce
 
 <!-- Steps that can be taken to reproduce the behavior -->
 
-1. Go to 'stack.com/...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
 ## Expected behavior
 
-<!-- A clear and concise description of what you expected to happen. -->
+<!-- A clear description of what you expected to happen. -->
 
 ## Screenshots
 
@@ -32,13 +27,6 @@ assignees: ''
 ## Logs
 
 <!-- If applicable, add logs to help explain your problem. -->
-
-## Environment
-
-- Charm / library version (if relevant): <!-- e.g. 1.2 -->
-- Juju version (output from `juju --version`):
-- Cloud Environment: <!-- e.g. GKE -->
-- Kubernetes version (output from `kubectl version --short`):
 
 ## Additional context
 
