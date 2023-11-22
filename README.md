@@ -43,7 +43,10 @@ export default function Home() {
 }
 ```
 
-You should be able to see the chatbot embedded in your app.
+You should be able to see the chatbot embedded in your app
+
+<img width="858" alt="image" src="https://github.com/stackai/react-stackai/assets/32944505/6df0c532-c85c-4d82-b004-9b4612f52139">
+
 
 ## Contributing
 
