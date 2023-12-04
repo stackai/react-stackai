@@ -44,6 +44,7 @@ function initializeStack() {
   iframe.style.borderRadius = '10px';
   iframe.style.width = IFRAME_WIDTH_MOBILE;
   iframe.style.height = IFRAME_HEIGHT_MOBILE;
+  iframe.setAttribute('allow', 'microphone');
 
   document.body.appendChild(iframe);
 

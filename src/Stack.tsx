@@ -47,9 +47,10 @@ const Stack = forwardRef(function Stack({ project, innerRef }: StackProps) {
   return (
     <iframe
       ref={innerRef}
+      src={project}
       id="responsiveIframe"
       className="chatbot-container"
-      src={project}
+      allow="microphone"
       style={{
         position: 'fixed',
         zIndex: '100',
