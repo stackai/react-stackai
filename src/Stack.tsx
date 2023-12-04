@@ -3,16 +3,26 @@ import { forwardRef, useEffect, LegacyRef } from 'react';
 type StackProps = {
   project: string;
   innerRef?: LegacyRef<HTMLIFrameElement> | undefined;
+  width?: string;
+  height?: string;
+  fixed?: boolean;
 };
 
 // We are forwarding the ref to the iframe so that the user has access to it.
-const Stack = forwardRef(function Stack({ project, innerRef }: StackProps) {
+const Stack = forwardRef(function Stack({
+  project,
+  innerRef,
+  width = '500px', // Default width value
+  height = '700px', // Default height value
+  fixed = false // Default fixed value
+}: StackProps) {
+
   // Resizes based on the open/close state of the chatbot
   useEffect(() => {
     const iframe = document.getElementById('responsiveIframe');
     if (iframe) {
-      iframe.style.width = '90px';
-      iframe.style.height = '90px';
+      iframe.style.width = width;
+      iframe.style.height = height;
     }
 
     const handleMessage = (event: MessageEvent) => {
@@ -52,7 +62,7 @@ const Stack = forwardRef(function Stack({ project, innerRef }: StackProps) {
       className="chatbot-container"
       allow="microphone"
       style={{
-        position: 'fixed',
+        position: fixed? 'fixed' : 'relative',
         zIndex: '100',
         overflow: 'hidden',
         bottom: '0',
