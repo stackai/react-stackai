@@ -12,9 +12,9 @@ type StackProps = {
 const Stack = forwardRef(function Stack({
   project,
   innerRef,
-  width = '500px', // Default width value
-  height = '700px', // Default height value
-  fixed = false // Default fixed value
+  width = '35rem', // Default width value
+  height = '38.5rem', // Default height value
+  fixed = true // Default fixed value
 }: StackProps) {
 
   // Resizes based on the open/close state of the chatbot
@@ -28,22 +28,15 @@ const Stack = forwardRef(function Stack({
     const handleMessage = (event: MessageEvent) => {
       const iframe = document.getElementById('responsiveIframe');
       if (iframe && event.data.type === 'chatbotStateChange') {
-        if (iframe && event.data.isClosed) {
-          setTimeout(() => {
-            iframe.style.width = '90px';
-            iframe.style.height = '90px';
-          }, 300);
+        const isMobile = window.innerWidth < 1000;
+        if (isMobile) {
+          // Mobile
+          iframe.style.width = '100vw';
+          iframe.style.height = '38.5rem';
         } else {
-          const isMobile = window.innerWidth < 1000;
-          if (isMobile) {
-            // Mobile
-            iframe.style.width = '100vw';
-            iframe.style.height = '38.5rem';
-          } else {
-            // Desktop
-            iframe.style.width = '35rem';
-            iframe.style.height = '38.5rem';
-          }
+          // Desktop
+          iframe.style.width = width;
+          iframe.style.height = height;
         }
       }
     };
