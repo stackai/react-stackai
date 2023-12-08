@@ -13,14 +13,20 @@ const Stack = forwardRef(function Stack({
   project,
   innerRef,
   width = 15, 
-  height = 54,
+  height = 55,
   fixed = true 
 }: StackProps) {
 
-  // Function to adjust width and height
   const adjustDimensions = (w: number, h: number) => {
-    const minWidth = 15; // Minimum width in rem
-    const minHeight = 38; // Minimum height in rem
+    const minWidth = 15; 
+    const minHeight = 38;
+
+    if (w < minWidth) {
+      console.warn(`Width is too small (${w}rem). Adjusting to minimum width (${minWidth}rem).`);
+    }
+    if (h < minHeight) {
+      console.warn(`Height is too small (${h}rem). Adjusting to minimum height (${minHeight}rem).`);
+    }
 
     return {
       adjustedWidth: w < minWidth ? `${minWidth}rem` : `${w}rem`,
