@@ -12,9 +12,9 @@ type StackProps = {
 const Stack = forwardRef(function Stack({
   project,
   innerRef,
-  width = '35rem', // Default width value
-  height = '38.5rem', // Default height value
-  fixed = true // Default fixed value
+  width = '35rem',
+  height = '38.5rem',
+  fixed = true
 }: StackProps) {
 
   // Resizes based on the open/close state of the chatbot
