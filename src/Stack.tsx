@@ -3,8 +3,8 @@ import { forwardRef, useEffect, LegacyRef } from 'react';
 type StackProps = {
   project: string;
   innerRef?: LegacyRef<HTMLIFrameElement> | undefined;
-  width?: string;
-  height?: string;
+  width?: number;
+  height?: number;
   fixed?: boolean;
 };
 
@@ -12,17 +12,30 @@ type StackProps = {
 const Stack = forwardRef(function Stack({
   project,
   innerRef,
-  width = '35rem', // Default width value
-  height = '38.5rem', // Default height value
-  fixed = true // Default fixed value
+  width = 15, 
+  height = 54,
+  fixed = true 
 }: StackProps) {
 
-  // Resizes based on the open/close state of the chatbot
+  // Function to adjust width and height
+  const adjustDimensions = (w: number, h: number) => {
+    const minWidth = 15; // Minimum width in rem
+    const minHeight = 38; // Minimum height in rem
+
+    return {
+      adjustedWidth: w < minWidth ? `${minWidth}rem` : `${w}rem`,
+      adjustedHeight: h < minHeight ? `${minHeight}rem` : `${h}rem`,
+    };
+  };
+
   useEffect(() => {
     const iframe = document.getElementById('responsiveIframe');
     if (iframe) {
-      iframe.style.width = width;
-      iframe.style.height = height;
+      // Adjust width and height based on the condition
+      const { adjustedWidth, adjustedHeight } = adjustDimensions(width, height);
+
+      iframe.style.width = adjustedWidth;
+      iframe.style.height = adjustedHeight;
     }
 
     const handleMessage = (event: MessageEvent) => {
@@ -35,8 +48,9 @@ const Stack = forwardRef(function Stack({
           iframe.style.height = '38.5rem';
         } else {
           // Desktop
-          iframe.style.width = width;
-          iframe.style.height = height;
+          const { adjustedWidth, adjustedHeight } = adjustDimensions(width, height);
+          iframe.style.width = adjustedWidth;
+          iframe.style.height = adjustedHeight;
         }
       }
     };
@@ -45,7 +59,7 @@ const Stack = forwardRef(function Stack({
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, []);
+  }, [width, height]);
 
   return (
     <iframe
@@ -55,7 +69,7 @@ const Stack = forwardRef(function Stack({
       className="chatbot-container"
       allow="microphone"
       style={{
-        position: fixed? 'fixed' : 'relative',
+        position: fixed ? 'fixed' : 'static',
         zIndex: '100',
         overflow: 'hidden',
         bottom: '0',
@@ -66,5 +80,6 @@ const Stack = forwardRef(function Stack({
     />
   );
 });
+
 
 export default Stack;
