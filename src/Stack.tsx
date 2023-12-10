@@ -12,8 +12,8 @@ type StackProps = {
 const Stack = forwardRef(function Stack({
   project,
   innerRef,
-  width = 15, 
-  height = 55,
+  width = 35, 
+  height = 38,
   fixed = true 
 }: StackProps) {
 
@@ -55,8 +55,8 @@ const Stack = forwardRef(function Stack({
         } else {
           // Desktop
           const { adjustedWidth, adjustedHeight } = adjustDimensions(width, height);
-          iframe.style.width = adjustedWidth;
-          iframe.style.height = adjustedHeight;
+            iframe.style.width = adjustedWidth;
+            iframe.style.height = adjustedHeight;
         }
       }
     };
@@ -66,6 +66,8 @@ const Stack = forwardRef(function Stack({
       window.removeEventListener('message', handleMessage);
     };
   }, [width, height]);
+
+  console.log(width, height)
 
   return (
     <iframe
@@ -86,6 +88,5 @@ const Stack = forwardRef(function Stack({
     />
   );
 });
-
 
 export default Stack;
