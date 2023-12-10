@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, LegacyRef } from 'react';
+import { forwardRef, useEffect} from 'react';
 
 const Stack = forwardRef(function Stack({
   project,
