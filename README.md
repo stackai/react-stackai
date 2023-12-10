@@ -54,7 +54,7 @@ These are all the props you can pass to the `<Stack />` component.
 | Name | Type   | Description
 | ---- | ------ | -----------
 | `project` | `string` | The URL of the project you want to embed
-| `width` | `number` | iframe width (default: 35rem; minimum is fixed to 15 rem)
+| `width` | `number` | iframe width in rem (default: 35 rem; minimum is fixed to 15 rem)
 | `fixed` | `boolean` | True if you want the chatbot to be fixed to the bottom of the screen, False if you want it to be relative to the page
 
 ## Contributing
