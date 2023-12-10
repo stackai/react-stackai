@@ -1,4 +1,11 @@
-import { forwardRef, useEffect} from 'react';
+import { forwardRef, useEffect, LegacyRef} from 'react';
+
+type StackProps = {
+  project: string;
+  innerRef?: LegacyRef<HTMLIFrameElement> | undefined;
+  width?: number;
+  fixed?: boolean;
+};
 
 const Stack = forwardRef(function Stack({
   project,

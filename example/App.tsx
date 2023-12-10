@@ -8,7 +8,7 @@ function App() {
       <Stack
         project="https://www.stack-ai.com/embed/stack[testt]/c9a85553-64aa-45d1-923d-d125825c2b2b/656cf12c16dd780760afde33"
         width = {35}
-        fixed = {false}
+        fixed = {true}
       />
     </>
   );
