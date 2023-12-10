@@ -49,14 +49,13 @@ You should be able to see the chatbot embedded in your app
 
 ## Props
 
-These are all the props you can pass to the <Stack /> component.
+These are all the props you can pass to the `<Stack />` component.
 
 | Name | Type   | Description
 | ---- | ------ | -----------
-| project | string | The URL of the project you want to embed
-| width | string | The width of the iframe (default: 35rem)
-| height | string | The height of the iframe (default: 38rem)
-| fixed | boolean | True if you want the chatbot to be fixed to the bottom of the screen, False if you want it to be relative to the page
+| `project` | `string` | The URL of the project you want to embed
+| `width` | `number` | iframe width (default: 35rem; minimum is fixed to 15 rem)
+| `fixed` | `boolean` | True if you want the chatbot to be fixed to the bottom of the screen, False if you want it to be relative to the page
 
 ## Contributing
 

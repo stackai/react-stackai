@@ -1,47 +1,33 @@
 import { forwardRef, useEffect, LegacyRef } from 'react';
 
-type StackProps = {
-  project: string;
-  innerRef?: LegacyRef<HTMLIFrameElement> | undefined;
-  width?: number;
-  height?: number;
-  fixed?: boolean;
-};
-
-// We are forwarding the ref to the iframe so that the user has access to it.
 const Stack = forwardRef(function Stack({
   project,
   innerRef,
   width = 35, 
-  height = 38,
   fixed = true 
 }: StackProps) {
 
-  const adjustDimensions = (w: number, h: number) => {
-    const minWidth = 15; 
-    const minHeight = 38;
+  const height = '38rem';
 
+  const adjustWidth = (w: number) => {
+    const minWidth = 15; 
+    
     if (w < minWidth) {
       console.warn(`Width is too small (${w}rem). Adjusting to minimum width (${minWidth}rem).`);
-    }
-    if (h < minHeight) {
-      console.warn(`Height is too small (${h}rem). Adjusting to minimum height (${minHeight}rem).`);
     }
 
     return {
       adjustedWidth: w < minWidth ? `${minWidth}rem` : `${w}rem`,
-      adjustedHeight: h < minHeight ? `${minHeight}rem` : `${h}rem`,
     };
   };
 
   useEffect(() => {
     const iframe = document.getElementById('responsiveIframe');
     if (iframe) {
-      // Adjust width and height based on the condition
-      const { adjustedWidth, adjustedHeight } = adjustDimensions(width, height);
-
+      // Adjust width only as height is now constant
+      const { adjustedWidth } = adjustWidth(width);
       iframe.style.width = adjustedWidth;
-      iframe.style.height = adjustedHeight;
+      iframe.style.height = height;
     }
 
     const handleMessage = (event: MessageEvent) => {
@@ -51,23 +37,22 @@ const Stack = forwardRef(function Stack({
         if (isMobile) {
           // Mobile
           iframe.style.width = '100vw';
-          iframe.style.height = '38.5rem';
+          iframe.style.height = height;
         } else {
           // Desktop
-          const { adjustedWidth, adjustedHeight } = adjustDimensions(width, height);
-            iframe.style.width = adjustedWidth;
-            iframe.style.height = adjustedHeight;
+          const { adjustedWidth } = adjustWidth(width);
+          iframe.style.width = adjustedWidth;
+          iframe.style.height = height;
         }
       }
     };
 
     window.addEventListener('message', handleMessage);
+    
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [width, height]);
-
-  console.log(width, height)
+  }, [width]); // Removed height from dependency array
 
   return (
     <iframe
@@ -83,10 +68,11 @@ const Stack = forwardRef(function Stack({
         bottom: '0',
         right: '0',
         border: 'none',
-        borderRadius: '10px',
+        borderRadius: '10px'
       }}
     />
   );
 });
 
 export default Stack;
+
