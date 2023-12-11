@@ -6,7 +6,7 @@ function App() {
     <>
       <h1>Demo website</h1>
       <Stack
-        project="https://www.stack-ai.com/embed/stack[testt]/c9a85553-64aa-45d1-923d-d125825c2b2b/656cf12c16dd780760afde33"
+        project="https://www.stack-ai.com/embed/46bf5b6a-9b4d-48f6-8a13-cdfc4fe58520/11da0c81-afe2-4ccd-b498-807bbde8e7f1/653fefcfcc37c0093d55e6a9"
         width = {35}
         fixed = {true}
       />

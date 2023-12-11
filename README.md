@@ -57,6 +57,8 @@ These are all the props you can pass to the `<Stack />` component.
 | `width` | `number` | iframe width in rem (default: 35 rem; minimum is fixed to 15 rem)
 | `fixed` | `boolean` | True if you want the chatbot to be fixed to the bottom of the screen, False if you want it to be relative to the page
 
+`height` of the iframe is automatically set to 38.5 rem. 
+
 ## Contributing
 
 ### Install dependencies for development
