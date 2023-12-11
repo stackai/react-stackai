@@ -14,7 +14,7 @@ const Stack = forwardRef(function Stack({
   fixed = true 
 }: StackProps) {
 
-  const height = '38rem';
+  const height = '38.5rem';
 
   const adjustWidth = (w: number) => {
     const minWidth = 15; 
