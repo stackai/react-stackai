@@ -1,55 +1,75 @@
-import { forwardRef, useEffect, LegacyRef} from 'react';
+import React, { forwardRef, LegacyRef, useEffect } from 'react';
 
 type StackProps = {
   project: string;
   innerRef?: LegacyRef<HTMLIFrameElement> | undefined;
-  width?: number;
+  width?: string;
   fixed?: boolean;
 };
 
 const Stack = forwardRef(function Stack({
   project,
   innerRef,
-  width = 35, 
+  width = '35rem', 
   fixed = true 
 }: StackProps) {
 
   const height = '38.5rem';
 
-  const adjustWidth = (w: number) => {
-    const minWidth = 15; 
-    
-    if (w < minWidth) {
-      console.warn(`Width is too small (${w}rem). Adjusting to minimum width (${minWidth}rem).`);
+  const adjustWidth = (w: string) => {
+    const minWidth = 15;
+    let adjustedWidth = '';
+
+    if (w.match(/(rem|px|em|%)$/)) {
+      adjustedWidth = w;
+    } else {
+      // If no unit is found, treat the string as a number and append 'rem'
+      const numericWidth = parseFloat(w);
+      if (isNaN(numericWidth)) {
+        throw new Error(`Invalid width: "${w}". Width must be a numeric value followed by a unit (e.g., '35rem', '100px').`);
+      }
+
+      if (numericWidth < minWidth) {
+        console.warn(`Width is too small (${numericWidth}rem). Adjusting to minimum width (${minWidth}rem).`);
+        adjustedWidth = `${minWidth}rem`;
+      } else {
+        adjustedWidth = `${numericWidth}rem`;
+      }
     }
 
-    return {
-      adjustedWidth: w < minWidth ? `${minWidth}rem` : `${w}rem`,
-    };
+    return { adjustedWidth };
   };
 
   useEffect(() => {
     const iframe = document.getElementById('responsiveIframe');
     if (iframe) {
-      // Adjust width only as height is now constant
-      const { adjustedWidth } = adjustWidth(width);
-      iframe.style.width = adjustedWidth;
-      iframe.style.height = height;
+      try {
+        // Adjust width only as height is now constant
+        const { adjustedWidth } = adjustWidth(width);
+        iframe.style.width = adjustedWidth;
+        iframe.style.height = height;
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     const handleMessage = (event: MessageEvent) => {
       const iframe = document.getElementById('responsiveIframe');
       if (iframe && event.data.type === 'chatbotStateChange') {
-        const isMobile = window.innerWidth < 1000;
-        if (isMobile) {
-          // Mobile
-          iframe.style.width = '100vw';
-          iframe.style.height = height;
-        } else {
-          // Desktop
-          const { adjustedWidth } = adjustWidth(width);
-          iframe.style.width = adjustedWidth;
-          iframe.style.height = height;
+        try {
+          const isMobile = window.innerWidth < 1000;
+          if (isMobile) {
+            // Mobile
+            iframe.style.width = '100vw';
+            iframe.style.height = height;
+          } else {
+            // Desktop
+            const { adjustedWidth } = adjustWidth(width);
+            iframe.style.width = adjustedWidth;
+            iframe.style.height = height;
+          }
+        } catch (error) {
+          console.error(error);
         }
       }
     };
@@ -59,7 +79,7 @@ const Stack = forwardRef(function Stack({
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [width]); // Removed height from dependency array
+  }, [width]); 
 
   return (
     <iframe
@@ -82,4 +102,3 @@ const Stack = forwardRef(function Stack({
 });
 
 export default Stack;
-
