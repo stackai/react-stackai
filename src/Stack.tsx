@@ -1,4 +1,4 @@
-import React, { forwardRef, LegacyRef, useEffect } from 'react';
+import { forwardRef, LegacyRef, useEffect } from 'react';
 
 type StackProps = {
   project: string;
@@ -17,29 +17,30 @@ const Stack = forwardRef(function Stack({
   const height = '38.5rem';
 
   const adjustWidth = (w: string) => {
-    const minWidth = 15;
+    const minWidth = '15rem';
+    const minWidthNumeric = parseFloat(minWidth);
+    const unitMatch = w.match(/(rem|px|em|%)$/);
     let adjustedWidth = '';
-
-    if (w.match(/(rem|px|em|%)$/)) {
-      adjustedWidth = w;
-    } else {
-      // If no unit is found, treat the string as a number and append 'rem'
-      const numericWidth = parseFloat(w);
-      if (isNaN(numericWidth)) {
-        throw new Error(`Invalid width: "${w}". Width must be a numeric value followed by a unit (e.g., '35rem', '100px').`);
+  
+    if (unitMatch) {
+      const numericPart = parseFloat(w);
+      if (isNaN(numericPart)) {
+        throw new Error(`Invalid width: "${w}". The numeric part of the width is not a valid number.`);
       }
-
-      if (numericWidth < minWidth) {
-        console.warn(`Width is too small (${numericWidth}rem). Adjusting to minimum width (${minWidth}rem).`);
-        adjustedWidth = `${minWidth}rem`;
+  
+      if (numericPart < minWidthNumeric) {
+        console.warn(`Width is too small (${numericPart}${unitMatch[0]}). Adjusting to minimum width (${minWidth}${unitMatch[0]}).`);
+        adjustedWidth = minWidth;
       } else {
-        adjustedWidth = `${numericWidth}rem`;
+        adjustedWidth = w;
       }
+    } else {
+      throw new Error(`Invalid width: "${w}". Width must be a numeric value followed by a unit (e.g., '35rem', '100px').`);
     }
-
+  
     return { adjustedWidth };
   };
-
+  
   useEffect(() => {
     const iframe = document.getElementById('responsiveIframe');
     if (iframe) {
