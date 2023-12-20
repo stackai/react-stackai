@@ -1,48 +1,91 @@
-import { forwardRef, useEffect, LegacyRef } from 'react';
+import { forwardRef, LegacyRef, useEffect } from 'react';
 
 type StackProps = {
   project: string;
   innerRef?: LegacyRef<HTMLIFrameElement> | undefined;
+  width?: string;
+  fixed?: boolean;
 };
 
-// We are forwarding the ref to the iframe so that the user has access to it.
-const Stack = forwardRef(function Stack({ project, innerRef }: StackProps) {
-  // Resizes based on the open/close state of the chatbot
+const Stack = forwardRef(function Stack({
+  project,
+  innerRef,
+  width = '35rem',
+  fixed = true,
+}: StackProps) {
+  const height = '38.5rem';
+
+  const adjustWidth = (w: string) => {
+    const minWidth = '15rem';
+    const minWidthNumeric = parseFloat(minWidth);
+    const unitMatch = w.match(/(rem|px|em|%)$/);
+    let adjustedWidth = '';
+
+    if (unitMatch) {
+      const numericPart = parseFloat(w);
+      if (isNaN(numericPart)) {
+        throw new Error(
+          `Invalid width: "${w}". The numeric part of the width is not a valid number.`
+        );
+      }
+
+      if (numericPart < minWidthNumeric) {
+        console.warn(
+          `Width is too small (${numericPart}${unitMatch[0]}). Adjusting to minimum width (${minWidth}${unitMatch[0]}).`
+        );
+        adjustedWidth = minWidth;
+      } else {
+        adjustedWidth = w;
+      }
+    } else {
+      throw new Error(
+        `Invalid width: "${w}". Width must be a numeric value followed by a unit (e.g., '35rem', '100px').`
+      );
+    }
+
+    return { adjustedWidth };
+  };
+
   useEffect(() => {
     const iframe = document.getElementById('responsiveIframe');
     if (iframe) {
-      iframe.style.width = '90px';
-      iframe.style.height = '90px';
+      try {
+        // Adjust width only as height is now constant
+        const { adjustedWidth } = adjustWidth(width);
+        iframe.style.width = adjustedWidth;
+        iframe.style.height = height;
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     const handleMessage = (event: MessageEvent) => {
       const iframe = document.getElementById('responsiveIframe');
       if (iframe && event.data.type === 'chatbotStateChange') {
-        if (iframe && event.data.isClosed) {
-          setTimeout(() => {
-            iframe.style.width = '90px';
-            iframe.style.height = '90px';
-          }, 300);
-        } else {
+        try {
           const isMobile = window.innerWidth < 1000;
           if (isMobile) {
             // Mobile
             iframe.style.width = '100vw';
-            iframe.style.height = '38.5rem';
+            iframe.style.height = height;
           } else {
             // Desktop
-            iframe.style.width = '35rem';
-            iframe.style.height = '38.5rem';
+            const { adjustedWidth } = adjustWidth(width);
+            iframe.style.width = adjustedWidth;
+            iframe.style.height = height;
           }
+        } catch (error) {
+          console.error(error);
         }
       }
     };
 
     window.addEventListener('message', handleMessage);
+
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, []);
+  }, [width]);
 
   return (
     <iframe
@@ -52,7 +95,7 @@ const Stack = forwardRef(function Stack({ project, innerRef }: StackProps) {
       className="chatbot-container"
       allow="microphone"
       style={{
-        position: 'fixed',
+        position: fixed ? 'fixed' : 'static',
         zIndex: '100',
         overflow: 'hidden',
         bottom: '0',
