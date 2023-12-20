@@ -10,10 +10,9 @@ type StackProps = {
 const Stack = forwardRef(function Stack({
   project,
   innerRef,
-  width = '35rem', 
-  fixed = true 
+  width = '35rem',
+  fixed = true,
 }: StackProps) {
-
   const height = '38.5rem';
 
   const adjustWidth = (w: string) => {
@@ -21,26 +20,32 @@ const Stack = forwardRef(function Stack({
     const minWidthNumeric = parseFloat(minWidth);
     const unitMatch = w.match(/(rem|px|em|%)$/);
     let adjustedWidth = '';
-  
+
     if (unitMatch) {
       const numericPart = parseFloat(w);
       if (isNaN(numericPart)) {
-        throw new Error(`Invalid width: "${w}". The numeric part of the width is not a valid number.`);
+        throw new Error(
+          `Invalid width: "${w}". The numeric part of the width is not a valid number.`
+        );
       }
-  
+
       if (numericPart < minWidthNumeric) {
-        console.warn(`Width is too small (${numericPart}${unitMatch[0]}). Adjusting to minimum width (${minWidth}${unitMatch[0]}).`);
+        console.warn(
+          `Width is too small (${numericPart}${unitMatch[0]}). Adjusting to minimum width (${minWidth}${unitMatch[0]}).`
+        );
         adjustedWidth = minWidth;
       } else {
         adjustedWidth = w;
       }
     } else {
-      throw new Error(`Invalid width: "${w}". Width must be a numeric value followed by a unit (e.g., '35rem', '100px').`);
+      throw new Error(
+        `Invalid width: "${w}". Width must be a numeric value followed by a unit (e.g., '35rem', '100px').`
+      );
     }
-  
+
     return { adjustedWidth };
   };
-  
+
   useEffect(() => {
     const iframe = document.getElementById('responsiveIframe');
     if (iframe) {
@@ -76,11 +81,11 @@ const Stack = forwardRef(function Stack({
     };
 
     window.addEventListener('message', handleMessage);
-    
+
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, [width]); 
+  }, [width]);
 
   return (
     <iframe
@@ -96,7 +101,7 @@ const Stack = forwardRef(function Stack({
         bottom: '0',
         right: '0',
         border: 'none',
-        borderRadius: '10px'
+        borderRadius: '10px',
       }}
     />
   );
