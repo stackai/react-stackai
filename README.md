@@ -51,13 +51,13 @@ You should be able to see the chatbot embedded in your app
 
 These are all the props you can pass to the `<Stack />` component.
 
-| Name | Type   | Description
-| ---- | ------ | -----------
-| `project` | `string` | The URL of the project you want to embed
-| `width` | `string` | Specifies the width of the iframe. The value must be a string with a numeric value followed by a unit (e.g., '35rem', '100px'). The default is '35rem'. If the width is less than the minimum width of 15 rem, a warning is logged, and the width is adjusted to the minimum. If the width is specified without a recognizable unit or is an invalid string, an error is thrown.
-| `fixed` | `boolean` | Set to true if you want the chatbot to be fixed to the bottom of the screen, or false if you want it to be relative to the page.
+| Name      | Type      | Description                                                                                                                                                                                                                                                                                                                                                                      |
+| --------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project` | `string`  | The URL of the project you want to embed                                                                                                                                                                                                                                                                                                                                         |
+| `width`   | `string`  | Specifies the width of the iframe. The value must be a string with a numeric value followed by a unit (e.g., '35rem', '100px'). The default is '35rem'. If the width is less than the minimum width of 15 rem, a warning is logged, and the width is adjusted to the minimum. If the width is specified without a recognizable unit or is an invalid string, an error is thrown. |
+| `fixed`   | `boolean` | Set to true if you want the chatbot to be fixed to the bottom of the screen, or false if you want it to be relative to the page.                                                                                                                                                                                                                                                 |
 
-`height` of the iframe is automatically set to 38.5 rem. 
+`height` of the iframe is automatically set to `40 rem`.
 
 ## Contributing
 
