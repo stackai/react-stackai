@@ -2,9 +2,9 @@
 const IFRAME_ID = 'responsiveIframe';
 const MOBILE_BREAKPOINT = 1000;
 const IFRAME_WIDTH_MOBILE = '100vw';
-const IFRAME_HEIGHT_MOBILE = '38.5rem';
+const IFRAME_HEIGHT_MOBILE = '39rem';
 const IFRAME_WIDTH_DESKTOP = '35rem';
-const IFRAME_HEIGHT_DESKTOP = '38.5rem';
+const IFRAME_HEIGHT_DESKTOP = '39rem';
 
 function initializeStack() {
   // Find the current script tag by searching for the one that includes this script's src
