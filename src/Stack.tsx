@@ -93,6 +93,7 @@ const Stack = forwardRef(function Stack({
       src={project}
       id="responsiveIframe"
       className="chatbot-container"
+      referrerPolicy="origin"
       allow="microphone"
       style={{
         position: fixed ? 'fixed' : 'static',
