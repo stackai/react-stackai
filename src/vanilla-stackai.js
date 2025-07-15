@@ -45,6 +45,7 @@ function initializeStack() {
   iframe.style.width = IFRAME_WIDTH_MOBILE;
   iframe.style.height = IFRAME_HEIGHT_MOBILE;
   iframe.setAttribute('allow', 'microphone');
+  iframe.setAttribute('referrerpolicy', 'origin');
 
   document.body.appendChild(iframe);
 
