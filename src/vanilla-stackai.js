@@ -6,24 +6,23 @@ const IFRAME_HEIGHT_MOBILE = '39rem';
 const IFRAME_WIDTH_DESKTOP = '35rem';
 const IFRAME_HEIGHT_DESKTOP = '39rem';
 
-function initializeStack() {
+const initializeStack = () => {
   // Find the current script tag by searching for the one that includes this script's src
-  var scripts = document.getElementsByTagName('script');
-  var currentScript = null;
+  let scripts = document.getElementsByTagName('script');
 
-  for (var i = 0; i < scripts.length; i++) {
-    if (scripts[i].src.includes('vanilla-stackai.js')) {
-      currentScript = scripts[i];
-      break;
-    }
-  }
+  // Converting nodes to array form
+  let scriptsList = Array.from(scripts);
+
+  let currentScript = scriptsList.find((script) => {
+    return script.src.includes('vanilla-stackai.js');
+  });
 
   if (!currentScript) {
     console.error('Current script not found.');
     return;
   }
 
-  var projectUrl = currentScript.getAttribute('data-project-url');
+  const projectUrl = currentScript.getAttribute('data-project-url');
 
   if (!projectUrl) {
     console.error(
@@ -32,7 +31,7 @@ function initializeStack() {
     return;
   }
 
-  var iframe = document.createElement('iframe');
+  let iframe = document.createElement('iframe');
   iframe.id = IFRAME_ID;
   iframe.src = projectUrl;
   iframe.style.position = 'fixed';
@@ -80,6 +79,6 @@ function initializeStack() {
     window.removeEventListener('message', handleMessage);
     document.body.removeChild(iframe);
   };
-}
+};
 
 initializeStack();
